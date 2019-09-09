@@ -44,9 +44,9 @@ main-deadlock.c
 
 En Consola
 
-![Optional Text](../lab/Pantallazos/5.1.1png)
+![Optional Text](../lab/Pantallazos/5.1.1.png)
 
-![Optional Text](../lab/Pantallazos/5.1.2png)
+![Optional Text](../lab/Pantallazos/5.1.2.png)
 
 
 6. Ahora observe ```main-signal.c```. Este código usa una variable (```done```) para señalar que el hijo esta hecho y que el padre puede continuar. ¿Por qué este códido es ineficiente? (En que termina el padre dedicando su tiempo, si el hijo toma una gran cantidad de tiempo en completarse).
