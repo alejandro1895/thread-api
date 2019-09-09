@@ -5,7 +5,19 @@ En esta sección escribiremos algunos programas multi-hilo y usaremos una herram
 ## Questions ##
 
 1. Primero codifique ```main-race.c```. Examine el código de manera que usted pueda ver (ojalá de manera obvia) un data race en el código. Ahora ejecute ```helgrind``` (al teclear ```valgrind --tool=helgrind ./main-race```) y vea como este programa reporta los *data races*. ¿Se muestran las líneas de código involucradas?, ¿Qué otra información entrega este programa?
+
+En el código se puede observar que existe un problema de sincronización, y que se tiene un recurso compartido (variable global balance) entre hilos que al no contar con un mecanismo de bloqueo, nos origina una condición de carrera.
+
+<<Imagen1.1>
+Al ejecutar el código con helgrind, efectivamente nos indica que se detectaron errores de sincronización y nos muestra las direcciones de memoria de las instrucciones en donde se lograron identificar los problemas.
+<<Imagen1.2>
 2. ¿Qué ocurre cuando usted elimina una de las líneas que generan problemas en el código? Ahora agrege un lock alrededor de las actualizaciones de la variable compartida, y entonces alrededor de ambas. ¿Qué reporta ```helgrind``` en cada uno de estos casos?
+Si comentamos la línea de código del hilo hijo en donde disminuye en 1 la variable compartida.
+<Imagen2.1>
+Puede observarse que no se detecta ningún error de sincronización, lo cual tiene sentido ya que solo el hilo padre estaría accediendo a la variable.
+<Imagen2.2>
+Al agregar un lock alrededor de las actualizaciones de la variable compartida balance, vemos que nuevamente Helgrind no detecta ningún error de sincronización, ya que con este mecanismo imponemos límites al acceso del recurso en un entorno donde hay varios hilos en ejecución . Este bloqueo está diseñado para hacer cumplir una política de control de concurrencia de exclusión mutua.
+<Imagen2.3>
 3. Ahora observe ```main-deadlock.c```. Examine el código. Este código tiene un problema conocido como deadlock. ¿Puede ver que problema podrá este tener?
 4. Ahora ejecute ```helgrind``` en este código. ¿Qué reporta helgrind?
 5. Ahora ejecute ```helgrind``` en ```main-deadlock-global.c```. Examine el código. ¿Tiene este el mismo problema que ```main-deadlock.c```? ¿Muestra ```helgrind``` el mismo reporte de error? ¿Qué dice esto a cerca de herramientas como ```helgrind```?
