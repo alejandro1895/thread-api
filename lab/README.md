@@ -15,6 +15,7 @@ Al ejecutar el código con helgrind, efectivamente nos indica que se detectaron 
 ![Optional Text](../lab/Pantallazos/1.2.png)
 
 2. ¿Qué ocurre cuando usted elimina una de las líneas que generan problemas en el código? Ahora agrege un lock alrededor de las actualizaciones de la variable compartida, y entonces alrededor de ambas. ¿Qué reporta ```helgrind``` en cada uno de estos casos?
+
 Si comentamos la línea de código del hilo hijo en donde disminuye en 1 la variable compartida.
 
 ![Optional Text](../lab/Pantallazos/Imagen2.1.png)
@@ -29,9 +30,23 @@ Al agregar un lock alrededor de las actualizaciones de la variable compartida ba
 
 3. Ahora observe ```main-deadlock.c```. Examine el código. Este código tiene un problema conocido como deadlock. ¿Puede ver que problema podrá este tener?
 
+![Optional Text](../lab/Pantallazos/3.png)
+
 4. Ahora ejecute ```helgrind``` en este código. ¿Qué reporta helgrind?
 
+![Optional Text](../lab/Pantallazos/4.png)
+
 5. Ahora ejecute ```helgrind``` en ```main-deadlock-global.c```. Examine el código. ¿Tiene este el mismo problema que ```main-deadlock.c```? ¿Muestra ```helgrind``` el mismo reporte de error? ¿Qué dice esto a cerca de herramientas como ```helgrind```?
+
+main-deadlock.c
+
+![Optional Text](../lab/Pantallazos/5.1.png)
+
+En Consola
+
+![Optional Text](../lab/Pantallazos/5.1.1png)
+
+![Optional Text](../lab/Pantallazos/5.1.2png)
 
 
 6. Ahora observe ```main-signal.c```. Este código usa una variable (```done```) para señalar que el hijo esta hecho y que el padre puede continuar. ¿Por qué este códido es ineficiente? (En que termina el padre dedicando su tiempo, si el hijo toma una gran cantidad de tiempo en completarse).
