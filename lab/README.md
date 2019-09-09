@@ -8,7 +8,9 @@ En esta sección escribiremos algunos programas multi-hilo y usaremos una herram
 
 En el código se puede observar que existe un problema de sincronización, y que se tiene un recurso compartido (variable global balance) entre hilos que al no contar con un mecanismo de bloqueo, nos origina una condición de carrera.
 
-![ScreenShot](https://raw.githubusercontent.com/alejandro1895/thread-api/blob/master/lab/Pantallazos/1.png)
+<p align="center">
+  <img src="lab/Pantallazos/1.png" width="350" title="hover text">
+</p>
 
 Al ejecutar el código con helgrind, efectivamente nos indica que se detectaron errores de sincronización y nos muestra las direcciones de memoria de las instrucciones en donde se lograron identificar los problemas.
 
