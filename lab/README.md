@@ -12,20 +12,20 @@ En el código se puede observar que existe un problema de sincronización, y que
 
 Al ejecutar el código con helgrind, efectivamente nos indica que se detectaron errores de sincronización y nos muestra las direcciones de memoria de las instrucciones en donde se lograron identificar los problemas.
 
-<<Imagen1.2>
+![Optional Text](../lab/Pantallazos/1.2.png)
 
 2. ¿Qué ocurre cuando usted elimina una de las líneas que generan problemas en el código? Ahora agrege un lock alrededor de las actualizaciones de la variable compartida, y entonces alrededor de ambas. ¿Qué reporta ```helgrind``` en cada uno de estos casos?
 Si comentamos la línea de código del hilo hijo en donde disminuye en 1 la variable compartida.
 
-<Imagen2.1>
+![Optional Text](../lab/Pantallazos/Imagen2.1.png)
 
 Puede observarse que no se detecta ningún error de sincronización, lo cual tiene sentido ya que solo el hilo padre estaría accediendo a la variable.
 
-<Imagen2.2>
+![Optional Text](../lab/Pantallazos/Imagen2.3.png)
 
 Al agregar un lock alrededor de las actualizaciones de la variable compartida balance, vemos que nuevamente Helgrind no detecta ningún error de sincronización, ya que con este mecanismo imponemos límites al acceso del recurso en un entorno donde hay varios hilos en ejecución . Este bloqueo está diseñado para hacer cumplir una política de control de concurrencia de exclusión mutua.
 
-<Imagen2.3>
+![Optional Text](../lab/Pantallazos/2.4.png)
 
 3. Ahora observe ```main-deadlock.c```. Examine el código. Este código tiene un problema conocido como deadlock. ¿Puede ver que problema podrá este tener?
 
@@ -45,7 +45,7 @@ Se vuelve un desperdicio si el hilo hijo se mantiene durante más tiempo, ya que
 Helgrind nos indica que con la implementación del código se puede dar una condición de carrera.
 Como los hilos comparten información sobre la variable global “done”. Potencialmente, este cambio provoca condiciones de carrera, dado que los diferentes hilos leen y escriben sin ningún tipo de orquestación sobre la misma variable.
 
-<Imagen7>
+![Optional Text](../lab/Pantallazos/7.png)
 
 8. Ahora observe una versión levemente modificada del código, la cual es encontrada en ```main-signal-cv.c```. Esta versión usa una variable de condición para señalizar (y asociar un lock). ¿Por qué este código es mejor que la versión previa? ¿Es la corrección, o el desempeño, o ambos?
 
@@ -55,5 +55,6 @@ Este código es mejor ya que al utilizar mutex se sincroniza el acceso a la vari
 
 Al ejecutar de nuevo el código con helgrind vemos que se nos indica que no se detectaron errores de sincronización.
 
-<Imagen 9>
+![Optional Text](../lab/Pantallazos/9.png)
+
 **Nota**: Se adjuntan los códigos para facilitar en análisis.
