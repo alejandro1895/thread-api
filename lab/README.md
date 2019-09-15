@@ -32,6 +32,11 @@ Al agregar un lock alrededor de las actualizaciones de la variable compartida ba
 
 ![Optional Text](../lab/Pantallazos/3.png)
 
+Como puede observarse este codigo hace que se ejecuten 2 hilos, y cada uno recibe un argumento distinto que hace que al evaluar la condicion del condicional IF accedan a distintas zonas e instrucciones del codigo.
+
+El problema de Interbloqueo puede ocurrir cuando uno de los hilos ya sea p1 o p2 adquiere el primer lock que se encuentra, e inmediatamente realiza un cambio de contexto hacia el otro hilo, ese hilo adquiere el primer lock que se encuentra y trata de adquirir el otro lock, el cual ya esta accedido por el otro hilo. Asi que en este punto tendriamos un deadlock ya que cada hilo esta esperando al otro sin poderse ejecutar.
+
+
 4. Ahora ejecute ```helgrind``` en este código. ¿Qué reporta helgrind?
 
 ![Optional Text](../lab/Pantallazos/4.png)
