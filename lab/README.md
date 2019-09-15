@@ -83,4 +83,4 @@ Al ejecutar de nuevo el código con helgrind vemos que se nos indica que no se d
 
 ![Optional Text](../lab/Pantallazos/9.png)
 
-**Nota**: Se adjuntan los códigos para facilitar en análisis.
+
