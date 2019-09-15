@@ -58,7 +58,7 @@ En Consola
 
 ![Optional Text](../lab/Pantallazos/5.2.2.png)
 
-Como puede observarse helgrind despues de implementar este nuevo codigo nos sigue mostrando 1 error en el cambio de contexto, esto puede ocurrir debido a que este enfoque requiere que sepamos exactamente qué bloqueos deben mantenerse y adquirirlos con anticipación. Tambien este codigo puede disminuir la concurrencia, ya que todos los bloqueos deben adquirirse desde el principio (a la vez) en lugar de cuando son realmente necesarios. Tambien por medio de este ejercicio de comparasion de codigos, podemos ver que helgrind es una herramienta util para identificar problemas de sincronizaciòn, sin embargo, vemos que en ocasiones no nos ofrece un analisis demasiado detallado de porque ocurre el error.
+Como puede observarse helgrind despues de implementar este nuevo codigo nos sigue mostrando 1 error en el cambio de contexto, esto puede ocurrir debido a que este enfoque requiere que sepamos exactamente qué bloqueos deben mantenerse y adquirirlos con anticipación. Tambien este codigo puede disminuir la concurrencia, ya que todos los bloqueos deben adquirirse desde el principio (a la vez) en lugar de cuando son realmente necesarios. Tambien por medio de este ejercicio de comparacion de codigos, podemos ver que helgrind es una herramienta util para identificar problemas de sincronizaciòn, sin embargo, vemos que en ocasiones no nos ofrece un analisis demasiado detallado de porque ocurre el error.
 
 6. Ahora observe ```main-signal.c```. Este código usa una variable (```done```) para señalar que el hijo esta hecho y que el padre puede continuar. ¿Por qué este códido es ineficiente? (En que termina el padre dedicando su tiempo, si el hijo toma una gran cantidad de tiempo en completarse).
 
