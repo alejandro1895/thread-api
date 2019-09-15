@@ -41,11 +41,16 @@ El problema de Interbloqueo puede ocurrir cuando uno de los hilos ya sea p1 o p2
 
 ![Optional Text](../lab/Pantallazos/4.png)
 
+helgrind nos indica que ha detectado un error de sincronizacion al realizar un cambio de contexto. Algo que como mencionaba antes era previsible que podia ocurrir al no tener un total control en la adquisicion de los locks por parte de cada hilo.
+
 5. Ahora ejecute ```helgrind``` en ```main-deadlock-global.c```. Examine el código. ¿Tiene este el mismo problema que ```main-deadlock.c```? ¿Muestra ```helgrind``` el mismo reporte de error? ¿Qué dice esto a cerca de herramientas como ```helgrind```?
 
 main-deadlock.c
 
 ![Optional Text](../lab/Pantallazos/5.1.png)
+
+Con este codigo se intenta evitar el deadlock haciendo que cada hilo adquiera todos los bloqueos a la vez de forma atomica por medio del lock g, garantizando que un cambio de contexto prematuro no produzca un estancamiento, ya que la condicion IF y ELSE, solo seria validada por un hilo a la vez. 
+
 
 En Consola
 
@@ -53,6 +58,7 @@ En Consola
 
 ![Optional Text](../lab/Pantallazos/5.2.2.png)
 
+Como puede observarse helgrind despues de implementar este nuevo codigo nos sigue mostrando 1 error en el cambio de contexto, esto puede ocurrir debido a que este enfoque requiere que sepamos exactamente qué bloqueos deben mantenerse y adquirirlos con anticipación. Tambien este codigo puede disminuir la concurrencia, ya que todos los bloqueos deben adquirirse desde el principio (a la vez) en lugar de cuando son realmente necesarios. Tambien por medio de este ejercicio de comparasion de codigos, podemos ver que helgrind es una herramienta util para identificar problemas de sincronizaciòn, sin embargo, vemos que en ocasiones no nos ofrece un analisis demasiado detallado de porque ocurre el error.
 
 6. Ahora observe ```main-signal.c```. Este código usa una variable (```done```) para señalar que el hijo esta hecho y que el padre puede continuar. ¿Por qué este códido es ineficiente? (En que termina el padre dedicando su tiempo, si el hijo toma una gran cantidad de tiempo en completarse).
 
